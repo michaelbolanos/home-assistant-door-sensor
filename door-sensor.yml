@@ -1,0 +1,80 @@
+alias: 11 - Door Sensor
+description: Controls alarm based on rear door status and bypass button.
+triggers:
+  - device_id: ece4913b144117fa8132406e2daa1cdd
+    domain: zha
+    type: remote_button_short_press
+    subtype: button
+    id: button_pressed
+    trigger: device
+  - entity_id: binary_sensor.rear_door_sensor_opening
+    to: "on"
+    for:
+      seconds: 2
+    id: door_opened
+    trigger: state
+  - entity_id: binary_sensor.rear_door_sensor_opening
+    to: "off"
+    for:
+      seconds: 2
+    id: door_closed
+    trigger: state
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: button_pressed
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_boolean.alarm_bypass
+                    state: "off"
+                sequence:
+                  - target:
+                      entity_id: input_boolean.alarm_bypass
+                    action: input_boolean.turn_on
+                    data: {}
+                  - type: turn_on
+                    device_id: 2cbcb93bc2681b993ba138789930d77a
+                    entity_id: ca355f04a053df3a9d95ab2575af2a6f
+                    domain: switch
+              - conditions:
+                  - condition: state
+                    entity_id: input_boolean.alarm_bypass
+                    state: "on"
+                sequence:
+                  - target:
+                      entity_id: input_boolean.alarm_bypass
+                    action: input_boolean.turn_off
+                    data: {}
+                  - type: turn_off
+                    device_id: 2cbcb93bc2681b993ba138789930d77a
+                    entity_id: ca355f04a053df3a9d95ab2575af2a6f
+                    domain: switch
+      - conditions:
+          - condition: trigger
+            id: door_opened
+          - condition: state
+            entity_id: input_boolean.alarm_bypass
+            state: "off"
+        sequence:
+          - target:
+              device_id: 6dd52a51c605645ceb2ca976dada6e9c
+            action: switch.turn_on
+            data: {}
+      - conditions:
+          - condition: trigger
+            id: door_closed
+        sequence:
+          - target:
+              device_id: 6dd52a51c605645ceb2ca976dada6e9c
+            action: switch.turn_off
+            data: {}
+          - type: turn_off
+            device_id: 2cbcb93bc2681b993ba138789930d77a
+            entity_id: ca355f04a053df3a9d95ab2575af2a6f
+            domain: switch
+mode: restart
+variables:
+  bypass_active: false
