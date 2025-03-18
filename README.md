@@ -3,6 +3,8 @@
 ## Overview
 This automation manages an alarm system based on the status of the rear door sensor and a bypass button. It ensures that the alarm triggers when the rear door is opened unless the bypass mode is active.
 
+This system was created to **monitor individuals who may be at risk of unknowingly exiting a door**. It provides an additional layer of security without modifying an existing home or commercial alarm system. This alarm can be used **only during daytime hours** for a **specific door**, avoiding the need to tamper with an overall security system.
+
 ## Components Used
 - **Shelly Button 1** – Used to toggle the alarm bypass mode.
 - **Shelly 1 Plus Relay (Status Light)** – Controls the status indicator.
@@ -57,6 +59,7 @@ This automation manages an alarm system based on the status of the rear door sen
 - The bypass button allows temporary disabling of the alarm system.
 - The alarm system resets when the door is closed.
 - The status light provides a visual indication of the alarm system state.
+- This alarm is designed to work alongside an existing home or commercial security system **without requiring modifications**, providing additional protection for a specific door when needed.
 
 ## Home Assistant YAML Configuration
 This automation is configured in Home Assistant's YAML file under Automations and can be managed via the UI.
@@ -125,4 +128,3 @@ automation:
 ```
 
 This configuration ensures proper integration with Home Assistant for seamless alarm control.
-
