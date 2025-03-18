@@ -45,4 +45,5 @@ This automation manages an alarm system based on the status of the rear door sen
 
 ### Home Assistant YAML Configuration
 This automation is configured in Home Assistant's YAML file under Automations and can be managed via the UI.
+The YAML is usually edited in code view, but the UI can be used to check and review.
 
