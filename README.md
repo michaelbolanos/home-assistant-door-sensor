@@ -3,13 +3,27 @@
 ## Overview
 This automation manages an alarm system based on the status of the rear door sensor and a bypass button. It ensures that the alarm triggers when the rear door is opened unless the bypass mode is active.
 
+## Components Used
+- **Shelly Button 1** – Used to toggle the alarm bypass mode.
+- **Shelly 1 Plus Relay (Status Light)** – Controls the status indicator.
+- **Shelly 1 Plus Relay (12V Siren)** – Controls the siren activation.
+- **12V DC Power Adapter** – Powers the combined siren and flashing red light.
+- **Aqara Door Sensor** – Detects when the rear door is opened or closed.
+- **SLZB-06M Zigbee Coordinator** – Manages Zigbee-based devices, including the Aqara door sensor.
+
+## Home Assistant Setup
+- **Controller:** Raspberry Pi 4 Model B, connected via hard-wired Ethernet with a static IP.
+- **Device Networking:** All applicable devices have static IP addresses.
+- **Backup Considerations:** Backups are crucial due to the risk of SD card corruption. A high-quality SanDisk SD card is used.
+- **Heat Management:** The Raspberry Pi 4 tends to get hot, which may require additional cooling solutions.
+
 ## Automation Details
 - **Alias:** 11 - Door Sensor
 - **Description:** Controls alarm based on rear door status and bypass button.
 
 ## Triggers
 1. **Button Pressed**
-   - Triggered when the button on a ZHA remote is short-pressed.
+   - Triggered when the Shelly Button 1 is pressed.
 2. **Door Opened**
    - Triggered when `binary_sensor.rear_door_sensor_opening` is `on` for 2 seconds.
 3. **Door Closed**
@@ -25,7 +39,7 @@ This automation manages an alarm system based on the status of the rear door sen
   - Turn **off** the alarm switch.
 
 ### Door Open Handling
-- If the alarm bypass is **off**, opening the rear door will turn **on** the alarm switch.
+- If the alarm bypass is **off**, opening the rear door will turn **on** the alarm switch, activating the siren and flashing red light.
 
 ### Door Close Handling
 - Closing the rear door will:
@@ -42,8 +56,73 @@ This automation manages an alarm system based on the status of the rear door sen
 - The automation ensures the alarm only triggers when the door is opened and the bypass is inactive.
 - The bypass button allows temporary disabling of the alarm system.
 - The alarm system resets when the door is closed.
+- The status light provides a visual indication of the alarm system state.
 
-### Home Assistant YAML Configuration
+## Home Assistant YAML Configuration
 This automation is configured in Home Assistant's YAML file under Automations and can be managed via the UI.
-The YAML is usually edited in code view, but the UI can be used to check and review.
+
+### Example YAML:
+```yaml
+automation:
+  - alias: "11 - Door Sensor"
+    description: "Controls alarm based on rear door status and bypass button."
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.rear_door_sensor_opening
+        to: "on"
+        for: "00:00:02"
+      - platform: state
+        entity_id: binary_sensor.rear_door_sensor_opening
+        to: "off"
+        for: "00:00:02"
+      - platform: state
+        entity_id: input_button.shelly_button_1
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.alarm_bypass
+                state: "off"
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.alarm_bypass
+              - service: switch.turn_on
+                target:
+                  entity_id: switch.alarm_siren
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.alarm_bypass
+                state: "on"
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.alarm_bypass
+              - service: switch.turn_off
+                target:
+                  entity_id: switch.alarm_siren
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: binary_sensor.rear_door_sensor_opening
+                state: "on"
+              - condition: state
+                entity_id: input_boolean.alarm_bypass
+                state: "off"
+            sequence:
+              - service: switch.turn_on
+                target:
+                  entity_id: switch.alarm_siren
+          - conditions:
+              - condition: state
+                entity_id: binary_sensor.rear_door_sensor_opening
+                state: "off"
+            sequence:
+              - service: switch.turn_off
+                target:
+                  entity_id: switch.alarm_siren
+```
+
+This configuration ensures proper integration with Home Assistant for seamless alarm control.
 
