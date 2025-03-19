@@ -5,7 +5,7 @@ This automation manages an alarm system based on the status of the rear door sen
 
 This system was created to **monitor individuals who may be at risk of unknowingly exiting a door**. It provides an additional layer of security without modifying an existing home or commercial alarm system. This alarm can be used **only during daytime hours** for a **specific door**, avoiding the need to tamper with an overall security system.
 
-## Components Used
+## Hardware Components Used
 - **Shelly Button 1** – Used to toggle the alarm bypass mode.
 - **Shelly 1 Plus Relay (Status Light)** – Controls the status indicator.
 - **Shelly 1 Plus Relay (12V Siren)** – Controls the siren activation.
@@ -14,7 +14,7 @@ This system was created to **monitor individuals who may be at risk of unknowing
 - **SMLIGHT SLZB-06M Zigbee Coordinator** – Manages Zigbee-based devices, including the Aqara door sensor.
 - **Unifi Cameras** – Integrated with Home Assistant to provide real-time monitoring of the rear door.
 
-## Home Assistant Setup
+## Home Automation Setup
 - **Controller:** Raspberry Pi 4 Model B, connected via hard-wired Ethernet with a static IP.
 - **Device Networking:** All applicable devices have static IP addresses.
 - **Backup Considerations:** Backups are crucial due to the risk of SD card corruption. A high-quality SanDisk SD card is used.
