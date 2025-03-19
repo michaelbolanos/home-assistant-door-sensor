@@ -27,13 +27,18 @@ This system was created to **monitor individuals who may be at risk of unknowing
   - **ZHA (Zigbee Home Automation)** – Handles the Aqara door sensor via the SMLIGHT SLZB-06M Zigbee Coordinator.
   - **UniFi Integration** – Provides real-time camera feeds, including monitoring of the rear door and status light.
 
-## Dashboard
+## Dashboard & Battery Monitoring
 - A **custom Lovelace dashboard** is set up in Home Assistant to:
   - Display the status of the **rear door sensor**.
   - Show the **status light** in real time.
   - Stream the **UniFi camera feed** for immediate visual confirmation of door activity.
 
 ## Automation Details
+
+### Battery Monitoring & Replacement Guidelines
+- The Aqara Door Sensor uses a battery, and its battery level is monitored in Home Assistant.
+- The battery status has been added to the Lovelace dashboard to ensure timely replacement and prevent unexpected failures.
+- Batteries should be replaced when they reach **60% or below** to maintain optimal performance and prevent device disconnections.
 - **Alias:** 11 - Door Sensor
 - **Description:** Controls alarm based on rear door status and bypass button.
 
