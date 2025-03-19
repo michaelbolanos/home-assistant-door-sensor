@@ -12,7 +12,7 @@ This system was created to **monitor individuals who may be at risk of unknowing
 - **12V DC Power Adapter** – Powers the combined siren and flashing red light.
 - **Aqara Door Sensor** – Detects when the rear door is opened or closed.
 - **SMLIGHT SLZB-06M Zigbee Coordinator** – Manages Zigbee-based devices, including the Aqara door sensor.
-- **Unifi Cameras** – Integrated with Home Assistant to provide real-time monitoring of the rear door.
+- **UniFi Cameras** – Integrated with Home Assistant to provide real-time monitoring of the rear door.
 
 ## Home Automation Setup
 - **Controller:** Raspberry Pi 4 Model B, connected via hard-wired Ethernet with a static IP.
@@ -24,13 +24,13 @@ This system was created to **monitor individuals who may be at risk of unknowing
 - **Integrations Used:**
   - **Shelly Integration** – Manages Shelly Button 1 and relays.
   - **ZHA (Zigbee Home Automation)** – Handles the Aqara door sensor via the SMLIGHT SLZB-06M Zigbee Coordinator.
-  - **Unifi Integration** – Provides real-time camera feeds, including monitoring of the rear door and status light.
+  - **UniFi Integration** – Provides real-time camera feeds, including monitoring of the rear door and status light.
 
 ## Dashboard
 - A **custom Lovelace dashboard** is set up in Home Assistant to:
   - Display the status of the **rear door sensor**.
   - Show the **status light** in real time.
-  - Stream the **Unifi camera feed** for immediate visual confirmation of door activity.
+  - Stream the **UniFi camera feed** for immediate visual confirmation of door activity.
 
 ## Automation Details
 - **Alias:** 11 - Door Sensor
