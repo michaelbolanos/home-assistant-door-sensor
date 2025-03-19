@@ -85,6 +85,20 @@ This system was created to **monitor individuals who may be at risk of unknowing
 ### 3. **Zigbee Coordinator & HA Reboot Order**
 - Found that rebooting the **Zigbee Coordinator first**, then **Home Assistant**, helps refresh the system and improve device stability.
 
-## Home Assistant YAML Configuration
+## Home Assistant YAML Configuration & Customization
 This automation is configured in Home Assistant's YAML file under Automations and can be managed via the UI.
+
+### Custom YAML Code & Entity ID Changes
+We modified our YAML configuration to ensure flexibility and ease of maintenance. The entity IDs were carefully renamed for better readability and consistency. Some key changes include:
+- Renaming `binary_sensor.rear_door_sensor_opening` to a more intuitive ID.
+- Ensuring that `input_boolean.alarm_bypass` aligns with other related automations.
+- Optimizing the conditions to make the system more efficient and reduce unnecessary triggers.
+
+### Clever Enhancements
+- **Real-time Feedback with UniFi Cameras**: The automation integrates UniFi cameras, allowing users to visually confirm the alarm status through the Lovelace dashboard.
+- **Hard-wired Shelly 1 WiFi Button**: Instead of relying on battery-powered Zigbee devices, we switched to a hard-wired Shelly button for more reliable operation.
+- **Logical Reset Approach**: The automation ensures that once the door closes, the alarm resets seamlessly, preventing unnecessary manual intervention.
+- **Zigbee Stability Improvement**: Best practices like rebooting the Zigbee Coordinator first before HA have been implemented to enhance system reliability.
+
+These improvements make the automation more robust, user-friendly, and efficient.
 
