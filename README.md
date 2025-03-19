@@ -3,7 +3,7 @@
 ## Overview
 This automation manages an alarm system based on the status of the rear door sensor and a bypass button. It ensures that the alarm triggers when the rear door is opened unless the bypass mode is active.
 
-This system was created to **monitor individuals who may be at risk of unknowingly exiting a door**. It provides an additional layer of security without modifying an existing home or commercial alarm system. This alarm can be used **only during daytime hours** for a **specific door**, avoiding the need to tamper with an overall security system.
+This system was created to **monitor individuals who may be at risk of unknowingly exiting a door**. It provides an additional layer of security without modifying an existing home or commercial alarm system. This alarm can be used **at any time** for a **specific door**, avoiding the need to tamper with an overall security system.
 
 ## Hardware Components Used
 - **Shelly Button 1** – Used to toggle the alarm bypass mode.
@@ -14,8 +14,9 @@ This system was created to **monitor individuals who may be at risk of unknowing
 - **SMLIGHT SLZB-06M Zigbee Coordinator** – Manages Zigbee-based devices, including the Aqara door sensor.
 - **UniFi Cameras** – Integrated with Home Assistant to provide real-time monitoring of the rear door.
 
-## Home Automation Setup
-- **Controller:** Raspberry Pi 4 Model B, connected via hard-wired Ethernet with a static IP.
+## Home Automation Setup & Raspberry Pi Performance
+
+- **Performance Considerations:** The Raspberry Pi 4 has more memory and processing power than previous models, making it well-suited for running Home Assistant, HACS (Home Assistant Community Store), and multiple integrations efficiently.
 - **Device Networking:** All applicable devices have static IP addresses.
 - **Backup Considerations:** Backups are crucial due to the risk of SD card corruption. A high-quality SanDisk SD card is used.
 - **Heat Management:** The Raspberry Pi 4 tends to get hot, which may require additional cooling solutions.
@@ -82,8 +83,8 @@ This system was created to **monitor individuals who may be at risk of unknowing
 - **Aqara door sensor** sometimes disconnects; considering **Konnected Alarm Panel** for hard-wired integration:  
   [Konnected Alarm Panel - Wired Alarm System Conversion Kit](https://konnected.io/products/konnected-alarm-panel-wired-alarm-system-conversion-kit)
 
-### 3. **Zigbee Coordinator & HA Reboot Order**
-- Found that rebooting the **Zigbee Coordinator first**, then **Home Assistant**, helps refresh the system and improve device stability.
+### 3. **System Reboot for Stability**
+- Rebooting the system periodically enhances overall stability. Restarting Home Assistant and the Zigbee Coordinator helps refresh connections and ensures smooth operation.
 
 ## Home Assistant YAML Configuration, Customization & Community Contributions
 This automation is configured in Home Assistant's YAML file under Automations and can be managed via the UI.
@@ -103,5 +104,5 @@ We modified our YAML configuration to ensure flexibility and ease of maintenance
 These improvements make the automation more robust, user-friendly, and efficient.
 
 ### Community Contributions & Feedback
-We welcome feedback and ideas from the Home Assistant community. If you have suggestions to improve this automation or experiences to share, please feel free to contribute. Whether it’s optimizing YAML code, enhancing stability, or integrating additional features, we’d love to hear your thoughts and collaborate on making this system even better.
+We welcome feedback and ideas from the Home Assistant community! If you have suggestions to improve this automation or experiences to share, please feel free to contribute. Whether it’s optimizing YAML code, enhancing stability, or integrating additional features, we’d love to hear your thoughts and collaborate on making this system even better.
 
