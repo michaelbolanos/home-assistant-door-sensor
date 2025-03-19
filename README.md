@@ -103,5 +103,5 @@ We modified our YAML configuration to ensure flexibility and ease of maintenance
 These improvements make the automation more robust, user-friendly, and efficient.
 
 ### Community Contributions & Feedback
-We welcome feedback and ideas from the Home Assistant community! If you have suggestions to improve this automation or experiences to share, please feel free to contribute. Whether it’s optimizing YAML code, enhancing stability, or integrating additional features, we’d love to hear your thoughts and collaborate on making this system even better.
+We welcome feedback and ideas from the Home Assistant community. If you have suggestions to improve this automation or experiences to share, please feel free to contribute. Whether it’s optimizing YAML code, enhancing stability, or integrating additional features, we’d love to hear your thoughts and collaborate on making this system even better.
 
