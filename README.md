@@ -11,13 +11,26 @@ This system was created to **monitor individuals who may be at risk of unknowing
 - **Shelly 1 Plus Relay (12V Siren)** – Controls the siren activation.
 - **12V DC Power Adapter** – Powers the combined siren and flashing red light.
 - **Aqara Door Sensor** – Detects when the rear door is opened or closed.
-- **SLZB-06M Zigbee Coordinator** – Manages Zigbee-based devices, including the Aqara door sensor.
+- **SMLIGHT SLZB-06M Zigbee Coordinator** – Manages Zigbee-based devices, including the Aqara door sensor.
+- **Unifi Cameras** – Integrated with Home Assistant to provide real-time monitoring of the rear door.
 
 ## Home Assistant Setup
 - **Controller:** Raspberry Pi 4 Model B, connected via hard-wired Ethernet with a static IP.
 - **Device Networking:** All applicable devices have static IP addresses.
 - **Backup Considerations:** Backups are crucial due to the risk of SD card corruption. A high-quality SanDisk SD card is used.
 - **Heat Management:** The Raspberry Pi 4 tends to get hot, which may require additional cooling solutions.
+- **Display Connectivity:** Raspberry Pi 4 requires a **Micro HDMI to HDMI cable** to connect to an external display. If using a **VGA monitor**, an additional **HDMI-to-VGA adapter** is needed.
+- **Home Assistant Core:** Manages all automations and integrations.
+- **Integrations Used:**
+  - **Shelly Integration** – Manages Shelly Button 1 and relays.
+  - **ZHA (Zigbee Home Automation)** – Handles the Aqara door sensor via the SMLIGHT SLZB-06M Zigbee Coordinator.
+  - **Unifi Integration** – Provides real-time camera feeds, including monitoring of the rear door and status light.
+
+## Dashboard
+- A **custom Lovelace dashboard** is set up in Home Assistant to:
+  - Display the status of the **rear door sensor**.
+  - Show the **status light** in real time.
+  - Stream the **Unifi camera feed** for immediate visual confirmation of door activity.
 
 ## Automation Details
 - **Alias:** 11 - Door Sensor
@@ -63,8 +76,7 @@ This system was created to **monitor individuals who may be at risk of unknowing
 
 ## Problems & Considerations
 ### 1. **Sonoff Button Issues**
-- The **Sonoff button** did not work reliably, so it was replaced with the **Aqara button**.
-- **Shelly 1 Button** was chosen because it is **hard-wired**, reducing reliability issues.
+- The **Sonoff Zigbee button** did not work reliably and was replaced with the **Shelly 1 WiFi button**, which is also **hard-wired**.
 
 ### 2. **Zigbee Device Stability**
 - **Aqara door sensor** sometimes disconnects; considering **Konnected Alarm Panel** for hard-wired integration:  
