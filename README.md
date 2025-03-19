@@ -61,5 +61,18 @@ This system was created to **monitor individuals who may be at risk of unknowing
 - The status light provides a visual indication of the alarm system state.
 - This alarm is designed to work alongside an existing home or commercial security system **without requiring modifications**, providing additional protection for a specific door when needed.
 
+## Problems & Considerations
+### 1. **Sonoff Button Issues**
+- The **Sonoff button** did not work reliably, so it was replaced with the **Aqara button**.
+- **Shelly 1 Button** was chosen because it is **hard-wired**, reducing reliability issues.
+
+### 2. **Zigbee Device Stability**
+- **Aqara door sensor** sometimes disconnects; considering **Konnected Alarm Panel** for hard-wired integration:  
+  [Konnected Alarm Panel - Wired Alarm System Conversion Kit](https://konnected.io/products/konnected-alarm-panel-wired-alarm-system-conversion-kit)
+
+### 3. **Zigbee Coordinator & HA Reboot Order**
+- Found that rebooting the **Zigbee Coordinator first**, then **Home Assistant**, helps refresh the system and improve device stability.
+
 ## Home Assistant YAML Configuration
 This automation is configured in Home Assistant's YAML file under Automations and can be managed via the UI.
+
