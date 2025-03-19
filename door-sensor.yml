@@ -1,22 +1,22 @@
 alias: 11 - Door Sensor
 description: Controls alarm based on rear door status and bypass button.
 triggers:
-  - device_id: ece4913b144117fa8132406e2daa1cdd
-    domain: zha
-    type: remote_button_short_press
-    subtype: button
+  - event_type: shelly.click
+    event_data:
+      device: shellybutton1-786519B128BB
+      click_type: single
     id: button_pressed
-    trigger: device
-  - entity_id: binary_sensor.rear_door_sensor_opening
+    trigger: event
+  - entity_id: binary_sensor.rear_door_sensor
     to: "on"
     for:
-      seconds: 2
+      seconds: 1
     id: door_opened
     trigger: state
-  - entity_id: binary_sensor.rear_door_sensor_opening
+  - entity_id: binary_sensor.rear_door_sensor
     to: "off"
     for:
-      seconds: 2
+      seconds: 1
     id: door_closed
     trigger: state
 actions:
@@ -35,10 +35,10 @@ actions:
                       entity_id: input_boolean.alarm_bypass
                     action: input_boolean.turn_on
                     data: {}
-                  - type: turn_on
-                    device_id: 2cbcb93bc2681b993ba138789930d77a
-                    entity_id: ca355f04a053df3a9d95ab2575af2a6f
-                    domain: switch
+                  - target:
+                      entity_id: switch.shellyplus1_100111111c_switch_0
+                    action: switch.turn_on
+                    data: {}
               - conditions:
                   - condition: state
                     entity_id: input_boolean.alarm_bypass
@@ -48,10 +48,10 @@ actions:
                       entity_id: input_boolean.alarm_bypass
                     action: input_boolean.turn_off
                     data: {}
-                  - type: turn_off
-                    device_id: 2cbcb93bc2681b993ba138789930d77a
-                    entity_id: ca355f04a053df3a9d95ab2575af2a6f
-                    domain: switch
+                  - target:
+                      entity_id: switch.shellyplus1_10061c111111_switch_0
+                    action: switch.turn_off
+                    data: {}
       - conditions:
           - condition: trigger
             id: door_opened
@@ -60,7 +60,7 @@ actions:
             state: "off"
         sequence:
           - target:
-              device_id: 6dd52a51c605645ceb2ca976dada6e9c
+              entity_id: switch.shellyplus1_c4d8d11111_switch_0
             action: switch.turn_on
             data: {}
       - conditions:
@@ -68,13 +68,14 @@ actions:
             id: door_closed
         sequence:
           - target:
-              device_id: 6dd52a51c605645ceb2ca976dada6e9c
+              entity_id:
+                - switch.shellyplus1_10061111111c_switch_0
+                - switch.shellyplus1_c4d8d211111_switch_0
             action: switch.turn_off
             data: {}
-          - type: turn_off
-            device_id: 2cbcb93bc2681b993ba138789930d77a
-            entity_id: ca355f04a053df3a9d95ab2575af2a6f
-            domain: switch
-mode: restart
-variables:
-  bypass_active: false
+          - target:
+              entity_id: input_boolean.alarm_bypass
+            action: input_boolean.turn_off
+            data: {}
+mode: queued
+max: 5
