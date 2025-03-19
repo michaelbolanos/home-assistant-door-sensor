@@ -94,7 +94,7 @@ We modified our YAML configuration to ensure flexibility and ease of maintenance
 - Ensuring that `input_boolean.alarm_bypass` aligns with other related automations.
 - Optimizing the conditions to make the system more efficient and reduce unnecessary triggers.
 
-### Clever Enhancements
+### Improvements and Features
 - **Real-time Feedback with UniFi Cameras**: The automation integrates UniFi cameras, allowing users to visually confirm the alarm status through the Lovelace dashboard.
 - **Hard-wired Shelly 1 WiFi Button**: Instead of relying on battery-powered Zigbee devices, we switched to a hard-wired Shelly button for more reliable operation.
 - **Logical Reset Approach**: The automation ensures that once the door closes, the alarm resets seamlessly, preventing unnecessary manual intervention.
